@@ -1,12 +1,16 @@
-<% @posts.each do |post| %>
-  <div>
-    <p>ユーザーネーム：<%= post.user.name %></p>
-    <p>タイトル：<%= post.title %></p>
-    <p>本文：<%= post.body %></p>
-     <% if post.images.attached? %>
-      <%= image_tag post.images, size: "150x150" %><br>
-    <%else%>
-      <img src="http://placehold.jp/150x150"><br>
-    <%end%>
+<div class="row">
+  <div class="col-12">
+    <% @posts.each do |post| %>
+      <div>
+        <p>ユーザーネーム：<%= post.user.name %></p>
+        <p>タイトル：<%= post.title %></p>
+        <p>本文：<%= post.body %></p>
+         <% if post.images.attached? %>
+          <%= image_tag post.images, size: "150x150" %><br>
+        <%else%>
+          <img src="http://placehold.jp/150x150"><br>
+        <%end%>
+      </div>
+    <% end %>
   </div>
-<% end %>
+</div>

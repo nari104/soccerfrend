@@ -3,8 +3,18 @@ class PostsController < ApplicationController
     @post = Post.new
   end
 
+  def create
+    @post = current_user.posts.new(post_params)
+    if @post.save
+      redirect_to posts_path
+    else
+      flash.now[:alert] = "投稿に失敗しました"
+      render :new
+    end
+  end
+
   def index
-    @posts = Post.all
+    @posts = Post.all.order(created_at: "DESC")
   end
 
   def show
@@ -12,13 +22,6 @@ class PostsController < ApplicationController
   end
 
   def edit
-  end
-
-  def create
-    @post = Post.new(post_params)
-    @post.user_id = current_user.id
-    @post.save
-    redirect_to posts_path
   end
 
   def update
@@ -35,5 +38,4 @@ class PostsController < ApplicationController
   def post_params
     params.require(:post).permit(:title, :body, :images)
   end
-
 end

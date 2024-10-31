@@ -1,0 +1,14 @@
+<div>
+  <p><%= @user.name %></p>
+  <%= image_tag @user.get_profile_image(100,100) %>
+  <P><%= link_to "編集", edit_user_registration_path %></P>
+</div>
+
+<% @posts.each do |post| %>
+<div>
+  <p>name：<%= post.user.name %></p>
+  <p><%= image_tag post.user.get_profile_image(50,50) %></p>
+  <p>title：<%= post.title %></p>
+  <p>body：<%= post.body %></p>
+</div>
+<% end %>

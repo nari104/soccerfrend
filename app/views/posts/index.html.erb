@@ -2,15 +2,18 @@
   <div class="col-12">
     <% @posts.each do |post| %>
       <div>
-        <p>ユーザーネーム：<%= post.user.name %></p>
+        <p><%= image_tag post.user.get_profile_image(30,30) %> ユーザーネーム：<%= post.user.name %></p>
         <p>タイトル：<%= post.title %></p>
         <p>本文：<%= post.body %></p>
-         <% if post.images.attached? %>
-          <%= image_tag post.images, size: "150x150" %><br>
-        <%else%>
-          <img src="http://placehold.jp/150x150"><br>
-        <%end%>
-      </div>
     <% end %>
   </div>
+</div>
+
+<div class="media">
+  <% @posts.each do |post| %>
+    <img class="align-self-start mr-3" <%= image_tag post.user.get_profile_image(30,30) %><%= post.user.name %> >
+    <div class="media-body">
+      <h5 class="mt-0">タイトル：<%= post.title %></h5>
+      <p>本文：<%= post.body %></p>
+  <% end %>
 </div>

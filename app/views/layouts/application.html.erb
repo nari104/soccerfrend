@@ -6,6 +6,8 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <script src="https://kit.fontawesome.com/440a14bfc9.js" crossorigin="anonymous"></script>
+
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
@@ -18,6 +20,7 @@
         <div class= "container">
           <a class= "navbar-brand" href="/">
             <span>Soccerfriends</span>
+            <i class="fa-solid fa-futbol"></i>
           </a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                         aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,9 +35,15 @@
                 <% end %>
               </li>
               <li>
+                <%= link_to new_post_path, class:"nav-link text-light" do %>
+                  <i class="fa-solid fa-comment"></i>
+                  New post
+                <% end %>
+              </li>
+              <li>
                 <%= link_to user_path(current_user), class:"nav-link text-light" do %>
-                  <i class="fa-solid fa-book-open"></i>
-                  Mypage
+                  <i class="fa-solid fa-user"></i>
+                  My page
                 <% end %>
               </li>
               <li>
@@ -85,7 +94,9 @@
       <% end %>
     </header>
     <main class="container">
-      <%= yield %>
+      <div class="mx-auto">
+        <%= yield %>
+      </div>
     </main>
     <footer>
       <div class="container mt-5">

@@ -1,10 +1,18 @@
 <div class="row">
-  <div class="col-12">
+  <div class="align-self-start mr-3">
     <% @posts.each do |post| %>
       <div>
-        <p><%= image_tag post.user.get_profile_image(30,30) %> ユーザーネーム：<%= post.user.name %></p>
-        <p>タイトル：<%= post.title %></p>
+        <td>
+          <%= image_tag post.user.get_profile_image(30,30) %><%= post.user.name %>
+        </td>
+        <p>タイトル : <%= link_to post.title, post_path(post.id) %></p>
         <p>本文：<%= post.body %></p>
+         <% if post.images.attached? %>
+          <%= image_tag post.images, size: "150x150" %><br>
+        <%else%>
+          <img src="http://placehold.jp/150x150"><br>
+        <%end%>
+      </div>
     <% end %>
   </div>
 </div>

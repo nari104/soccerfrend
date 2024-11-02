@@ -10,7 +10,7 @@
         <% end %>
       </ul>
     <% end %>
-    <%= form_with model: @post do |f| %>
+    <%= form_with model: @post, local: true do |f| %>
       <div class="form-group">
         <%= f.label :title %>
         <%= f.text_field :title, class: "form-control" %>

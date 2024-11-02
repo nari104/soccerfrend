@@ -1,2 +1,27 @@
-<h1>Posts#edit</h1>
-<p>Find me in app/views/posts/edit.html.erb</p>
+<div class="row">
+    <div class="col-12 mx-auto">
+      <h1>投稿編集</h1>
+      <%= form_with model: @post, url: post_path(@post.id), method: :patch do |f| %>
+      <div class="form-group">
+        <%= f.label :title %>
+        <%= f.text_field :title, class: 'form-control book_title' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :body %>
+        <%= f.text_area :body, class: 'form-control book_opinion' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :images %>
+        <%= f.file_field :images, class: "form-control-file", accept: "image/*", multiple: true %>
+      </div>
+      <div class="form-group">
+        <%= f.submit class: 'btn btn-success' %>
+      </div>
+      <div>
+        <span class="link"><%=link_to "Show", post_path(@post.id) %></span>
+        |
+        <span><%= link_to "戻る", posts_path %></span>
+      </div>
+      <% end %>
+    </div>
+  </div>

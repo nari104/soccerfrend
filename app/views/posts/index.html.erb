@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="align-self-start mr-3">
+  <div class="col-12">
     <% @posts.each do |post| %>
       <div>
         <td>
@@ -7,21 +7,10 @@
         </td>
         <p>タイトル : <%= link_to post.title, post_path(post.id) %></p>
         <p>本文：<%= post.body %></p>
-         <% if post.images.attached? %>
-          <%= image_tag post.images, size: "150x150" %><br>
-        <%else%>
-          <img src="http://placehold.jp/150x150"><br>
-        <%end%>
+        <% post.images.each do |image| %>
+          <%= image_tag image, size: "150x150" %>
+        <% end %>
       </div>
     <% end %>
   </div>
-</div>
-
-<div class="media">
-  <% @posts.each do |post| %>
-    <img class="align-self-start mr-3" <%= image_tag post.user.get_profile_image(30,30) %><%= post.user.name %> >
-    <div class="media-body">
-      <h5 class="mt-0">タイトル：<%= post.title %></h5>
-      <p>本文：<%= post.body %></p>
-  <% end %>
 </div>

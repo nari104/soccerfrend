@@ -2,20 +2,14 @@
   <p>ユーザーネーム：<%= @post.user.name %></p>
   <p>タイトル：<%= @post.title %></p>
   <p>本文：<%= @post.body %></p>
-  <% if @post.images.attached? %>
-      <%= image_tag @post.images, size: "150x150" %><br>
-    <%else%>
-      <img src="http://placehold.jp/150x150"><br>
-    <%end%>
+  <% @post.images.each do |image| %>
+    <%= image_tag image, size: "150x150" %>
+  <% end %>
   <p>投稿日：<%= @post.created_at.strftime('%Y/%m/%d') %></p>
-  <td>
-    <% if @post.user == current_user %>
-      <%= link_to "編集", edit_post_path(@post.id), class: "btn btn-sm btn-success" %>
-    <% end %>
-   </td>
-  <td>
-    <% if @post.user == current_user %>
-      <%= link_to "削除", post_path(@post),class: "btn btn-sm btn-danger", method: :delete  %>
-    <% end %>
-  </td>
+  <% if @post.user == current_user %>
+    <%= link_to "編集", edit_post_path(@post.id), class: "btn btn-sm btn-success" %>
+  <% end %>
+  <% if @post.user == current_user %>
+    <%= link_to "削除", post_path(@post),class: "btn btn-sm btn-danger", method: :delete  %>
+  <% end %>
 </div>

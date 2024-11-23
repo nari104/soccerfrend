@@ -12,4 +12,10 @@
   <% if @post.user == current_user %>
     <%= link_to "削除", post_path(@post),class: "btn btn-sm btn-danger", method: :delete  %>
   <% end %>
+
+  <%= form_with model: [post, post_comment] do |f| %>
+    <%= f.text_area :comment, rows:'5', placeholder: "コメントをここに", class: "w-100" %>
+    <%= f.submit "送信" %>
+  <% end %>
+
 </div>

@@ -5,7 +5,11 @@ Rails.application.routes.draw do
     sessions: 'users/sessions',
     registrations: 'users/registrations'
   }
+
+  get "search" => "searches#search"
+
   resources :posts, only: [:new, :create, :index, :show, :update, :edit, :destroy]
   resources :users, only: [:show, :edit, :update]
+  resources :post_comments, only: [:create, :destroy]
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

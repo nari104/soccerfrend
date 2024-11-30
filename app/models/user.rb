@@ -9,8 +9,10 @@ class User < ApplicationRecord
   has_one_attached :profile_image
 
   has_many :post_comments, dependent: :destroy
- #複数のBookComentと関連付ける
- #userが消されたとき関連するBookComentも同時に消される
+ #複数のPostComentと関連付ける
+ #userが消されたとき関連するPostComentも同時に消される
+
+ has_many :favorites, dependent: :destroy
 
   def get_profile_image(width, height)
     unless profile_image.attached?

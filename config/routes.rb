@@ -6,10 +6,23 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
 
+  resources :posts, only: [:new, :create, :index, :show, :update, :edit, :destroy] do
+    resource :favorites, only: [:create, :destroy]
+  end
+
+  devise_for :admin, skip: [:registrations, :password], controllers: {
+    sessions: 'admin/sessions'
+  }
+
+  namespace :admin do
+    get 'dashboards', to: 'dashboards#index'
+  end
+
   get "search" => "searches#search"
 
-  resources :posts, only: [:new, :create, :index, :show, :update, :edit, :destroy]
+  resources :posts, only: [:new, :create, :index, :show, :update, :edit, :destroy] do
+    resources :post_comments, only: [:create, :destroy]
+  end
+
   resources :users, only: [:show, :edit, :update]
-  resources :post_comments, only: [:create, :destroy]
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

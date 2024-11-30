@@ -3,9 +3,11 @@ class Post < ApplicationRecord
   has_many_attached :images
   belongs_to :user
 
-  has_many :book_comments, dependent: :destroy
- #複数のBookComentと関連付ける
- #bookが消されたとき関連するBookComentも同時に消される
+  has_many :post_comments, dependent: :destroy
+ #複数のPostComentと関連付ける
+ #Postが消されたとき関連するPostComentも同時に消される
+
+ has_many :favorites, dependent: :destroy
 
   validates :title, presence: true
   validates :body, presence: true, length: {maximum: 200}
@@ -17,8 +19,12 @@ class Post < ApplicationRecord
     elsif search == "partial_match"
       @post = Post.where("title LIKE?","%#{word}%")
     else
-      @book = Book.all
+      @post = Post.all
     end
+  end
+
+  def favorited_by?(user)
+   favorites.exists?(user_id: user.id)
   end
 
 

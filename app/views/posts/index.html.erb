@@ -1,16 +1,19 @@
 <div class="row">
   <div class="col-12">
-    <% @posts.each do |post| %>
-      <div>
-        <td>
-          <%= image_tag post.user.get_profile_image(30,30) %><%= post.user.name %>
-        </td>
-        <p>タイトル : <%= link_to post.title, post_path(post.id) %></p>
-        <p>本文：<%= post.body %></p>
-        <% post.images.each do |image| %>
-          <%= image_tag image, size: "150x150" %>
-        <% end %>
-      </div>
-    <% end %>
+    <div class="row">
+      <% @posts.each do |post| %>
+        <div class="col-4 mb-3">
+          <div class="card" style="width: 18rem;">
+            <% image = post.images.first || "no_image.jpg" %>
+            <%= image_tag image, class: "card-img-top w-100", style: "height: 120px; object-fit: contain;" %>
+            <div class="card-body">
+              <h5 class="card-title"><%= link_to post.title, post_path(post.id) %></h5>
+              <p class="card-text"><%= post.body %></p>
+              <%= link_to "詳細を見る", post_path(post.id), class: "btn btn-primary" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>
